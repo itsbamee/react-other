@@ -13,14 +13,12 @@ function App() {
 	return (
 		<>
 			<Header />
-
 			<Route exact path='/' component={Visual} />
 			<Route path='/department' component={Department} />
 			<Route path='/gallery' component={Gallery} />
 			<Route path='/youtube' component={Youtube} />
 			<Route path='/members' component={Members} />
 			<Route path='/contact' component={Contact} />
-
 			<Footer />
 		</>
 	);
