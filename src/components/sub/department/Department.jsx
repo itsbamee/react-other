@@ -1,7 +1,9 @@
+import Layout from '../../common/layout/Layout';
+
 export default function Department() {
 	return (
-		<>
-			<h1>Department</h1>
-		</>
+		<Layout title={'Department'}>
+			<p>멤버소개 상세페이지</p>
+		</Layout>
 	);
 }
