@@ -1,9 +1,20 @@
 import Layout from '../../common/layout/Layout';
+import { useState } from 'react';
 
 export default function Department() {
+	console.log('re-render');
+	//리액트 컴포넌트 무조건 state에 담겨있는 값만 변화점을 인지해서 컴포넌트를 재호출하면서 화면 갱신
+	//useState는 2개의 값이 담겨있는 배열을 반환
+	//첫번째값은 인수에 전달된 값을 초기값으로 활용한 State값
+	//두번째값은 해당 State를 변경할 수있는 State변경 전용함수, 무조건 State는 전용함수로만 변경가능
+	//const [state값, state변경함수] = useState(초기값)
+	const [Num, setNum] = useState(0);
+
 	return (
 		<Layout title={'Department'}>
-			<p>멤버소개 상세페이지</p>
+			<button>minus</button>
+			<button onClick={() => setNum(Num + 1)}>plus</button>
+			<h2>{Num}</h2>
 		</Layout>
 	);
 }
