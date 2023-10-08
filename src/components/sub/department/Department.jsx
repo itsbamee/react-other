@@ -8,7 +8,7 @@ export default function Department() {
 
 	return (
 		<Layout title={'Department'}>
-			<button onClick={() => setOpen(true)}>open</button>
+			<button onClick={() => setOpen(!Open)}>{Open ? 'close' : 'open'}</button>
 			{Open && <Modal />}
 		</Layout>
 	);
