@@ -11,13 +11,20 @@
 	h1 {
 		font: normal 80px/1 'nanum myeongjo';
 		color: #444;
-		margin-bottom: 30px;
+		margin-bottom: 10px;
 
 		span {
 			opacity: 0;
 			transform: scale(3);
 			transition-duration: 0.5s;
 		}
+	}
+	.bar {
+		width: 0px;
+		height: 1px;
+		background: #000;
+		margin-bottom: 40px;
+		transition: 1s 1s;
 	}
 
 	&.on {
@@ -28,6 +35,9 @@
 				opacity: 1;
 				transform: scale(1);
 			}
+		}
+		.bar {
+			width: 50px;
 		}
 	}
 }
