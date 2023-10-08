@@ -1,5 +1,5 @@
 import Layout from '../../common/layout/Layout';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import './Department.scss';
 import Modal from '../../common/modal/Modal';
 
@@ -8,7 +8,9 @@ export default function Department() {
 
 	return (
 		<Layout title={'Department'}>
-			<button onClick={() => setOpen(!Open)}>{Open ? 'close' : 'open'}</button>
+			<button onClick={() => setOpen(!Open)}>
+				{Open ? 'close' : 'open'}
+			</button>
 			{Open && <Modal />}
 		</Layout>
 	);
