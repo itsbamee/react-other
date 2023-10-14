@@ -1,7 +1,7 @@
 import './Department.scss';
 import Layout from '../../common/layout/Layout';
 import React, { useEffect, useState } from 'react';
-import { useFecth } from '../../../hooks/useFecth';
+import { useFetch } from '../../../hooks/useFetch';
 
 const path = process.env.PUBLIC_URL;
 
@@ -9,7 +9,7 @@ export default function Department() {
 	const [Title, setTitle] = useState('');
 	const [Department, setDepartment] = useState([]);
 	const [History, setHistory] = useState([]);
-	const fetchData = useFecth();
+	const fetchData = useFetch();
 	console.log(History);
 
 	useEffect(() => {
