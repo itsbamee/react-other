@@ -1,6 +1,6 @@
-import Layout from '../../common/layout/Layout';
-import { useEffect, useState } from 'react';
 import './Department.scss';
+import Layout from '../../common/layout/Layout';
+import React, { useEffect, useState } from 'react';
 import { useFecth } from '../../../hooks/useFecth';
 
 const path = process.env.PUBLIC_URL;
@@ -8,23 +8,30 @@ const path = process.env.PUBLIC_URL;
 export default function Department() {
 	const [Title, setTitle] = useState('');
 	const [Department, setDepartment] = useState([]);
+	const [History, setHistory] = useState([]);
 	const fetchData = useFecth();
+	console.log(History);
 
 	useEffect(() => {
+		fetchData(`${path}/DB/history.json`, setHistory);
 		fetchData(`${path}/DB/department.json`, setDepartment, setTitle);
 	}, []);
 
 	return (
 		<Layout title={'Department'}>
 			<section id='historyBox'>
-				{/* <h2>Histroy</h2>
-				<article>
-					<h3>2016</h3>
-					<ul>
-						<li>This company was established.</li>
-						<li>Launch First Prototype Project</li>
-					</ul>
-				</article> */}
+				{History.map((data, idx) => {
+					return (
+						<React.Fragment key={idx}>
+							<h2>{Object.keys(data)[0]}</h2>
+							<ul>
+								{Object.values(data)[0].map((val, idx) => (
+									<li key={idx}>{val}</li>
+								))}
+							</ul>
+						</React.Fragment>
+					);
+				})}
 			</section>
 
 			<section id='memberBox'>
