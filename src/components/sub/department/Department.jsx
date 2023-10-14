@@ -15,13 +15,17 @@ export default function Department() {
 	const [Title, setTitle] = useState('');
 	const [Department, setDepartment] = useState([]);
 
-	useEffect(() => {
-		fetch(`${path}/DB/department.json`)
+	const fetchData = (url, setValue, setKey) => {
+		fetch(url)
 			.then((data) => data.json())
 			.then((json) => {
-				setTitle(Object.keys(json)[0]);
-				setDepartment(Object.values(json)[0]);
+				setValue(Object.values(json)[0]);
+				setKey && setKey(Object.keys(json)[0]);
 			});
+	};
+
+	useEffect(() => {
+		fetchData(`${path}/DB/department.json`, setDepartment, setTitle);
 	}, []);
 
 	return (
