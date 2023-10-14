@@ -25,7 +25,7 @@ export default function Department() {
 					{History.map((data, idx) => {
 						return (
 							<React.Fragment key={idx}>
-								<h2>{Object.keys(data)[0]}</h2>
+								<h3>{Object.keys(data)[0]}</h3>
 								<ul>
 									{Object.values(data)[0].map((val, idx) => (
 										<li key={idx}>{val}</li>
