@@ -1,6 +1,6 @@
-import { useFetch } from '../../../hooks/useFetch';
 import Layout from '../../common/layout/Layout';
 import { useState, useEffect } from 'react';
+import { useFetch } from '../../../hooks/useFetch';
 import { Link } from 'react-router-dom';
 
 export default function Youtube() {
@@ -14,13 +14,6 @@ export default function Youtube() {
 		const num = 10;
 		const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&playlistId=${pid}&maxResults=${num}`;
 		fetchData(baseURL, setVids);
-
-		// fetch(baseURL)
-		// 	.then((data) => data.json())
-		// 	.then((json) => {
-		// 		console.log(json.items);
-		// 		setVids(json.items);
-		// 	});
 	}, []);
 
 	return (
