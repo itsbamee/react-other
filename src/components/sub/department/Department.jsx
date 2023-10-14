@@ -12,19 +12,34 @@ import './Department.scss';
 const path = process.env.PUBLIC_URL;
 
 export default function Department() {
+	const [Title, setTitle] = useState('');
 	const [Department, setDepartment] = useState([]);
 
 	useEffect(() => {
 		fetch(`${path}/DB/department.json`)
 			.then((data) => data.json())
 			.then((json) => {
-				setDepartment(json.members);
+				setTitle(Object.keys(json)[0]);
+				setDepartment(Object.values(json)[0]);
 			});
 	}, []);
 
 	return (
 		<Layout title={'Department'}>
+			<section id='historyBox'>
+				{/* <h2>Histroy</h2>
+				<article>
+					<h3>2016</h3>
+					<ul>
+						<li>This company was established.</li>
+						<li>Launch First Prototype Project</li>
+					</ul>
+				</article> */}
+			</section>
+
 			<section id='memberBox'>
+				<h2>{Title.charAt(0).toUpperCase() + Title.slice(1)}</h2>
+
 				{Department.map((member, idx) => {
 					return (
 						<article key={idx}>
@@ -34,7 +49,7 @@ export default function Department() {
 									alt={member.name}
 								/>
 							</div>
-							<h2>{member.name}</h2>
+							<h3>{member.name}</h3>
 							<p>{member.position}</p>
 						</article>
 					);
