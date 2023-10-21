@@ -1,11 +1,10 @@
 import Layout from '../../common/layout/Layout';
 import './Gallery.scss';
 import { useState, useEffect } from 'react';
-import { useFetch } from '../../../hooks/useFetch';
 
 export default function Gallery() {
 	const [Pics, setPics] = useState([]);
-	const fetchData = useFetch();
+
 	//console.log(Pics);
 
 	useEffect(() => {
@@ -14,7 +13,9 @@ export default function Gallery() {
 		const method_interest = 'flickr.interestingness.getList';
 		const num = 40;
 		const url = `${baseURL}&api_key=${key}&method=${method_interest}&per_page=${num}`;
-		fetchData(url, setPics);
+		fetch(url)
+			.then((data) => data.json())
+			.then((json) => setPics(json.photos.photo));
 	}, []);
 
 	return (
