@@ -51,10 +51,10 @@
 }
 
 //laptop
-@media screen and (max-width: 1399px) {
-}
+
 //tablet
-@media screen and (max-width: 999px) {
+.tablet,
+.mobile {
 	.youtube {
 		article {
 			padding: 40px 0px;
@@ -77,8 +77,9 @@
 		}
 	}
 }
+
 //mobile
-@media screen and (max-width: 639px) {
+.mobile {
 	.youtube {
 		article {
 			padding: 30px 0px;
