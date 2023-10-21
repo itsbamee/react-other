@@ -33,6 +33,14 @@ export default function Gallery() {
 								/>
 							</div>
 							<h2>{pic.title}</h2>
+
+							<div className='profile'>
+								<img
+									src={`http://farm${pic.farm}.staticflickr.com/${pic.server}/buddyicons/${pic.owner}.jpg`}
+									alt={pic.owner}
+								/>
+								<span>{pic.owner}</span>
+							</div>
 						</article>
 					);
 				})}
