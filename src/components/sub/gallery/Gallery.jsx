@@ -6,7 +6,6 @@ import { useState, useEffect, useRef } from 'react';
 export default function Gallery() {
 	const myID = '197119297@N02';
 	const [Pics, setPics] = useState([]);
-	//IsUser초기값을 내아이디 문자값으로 등록
 	let [IsUser, setIsUser] = useState(myID);
 	const refElBtnSet = useRef(null);
 
@@ -16,13 +15,16 @@ export default function Gallery() {
 		const key = process.env.REACT_APP_FLICKR_KEY;
 		const method_interest = 'flickr.interestingness.getList';
 		const method_user = 'flickr.people.getPhotos';
+		const method_search = 'flickr.photos.search';
 		const num = 40;
 		let url = '';
 		const url_interest = `${baseURL}&api_key=${key}&method=${method_interest}&per_page=${num}`;
 		const url_user = `${baseURL}&api_key=${key}&method=${method_user}&per_page=${num}&user_id=${opt.id}`;
+		const url_search = `${baseURL}&api_key=${key}&method=${method_search}&per_page=${num}&tags=${opt.keyword}`;
 
 		opt.type === 'user' && (url = url_user);
 		opt.type === 'interest' && (url = url_interest);
+		opt.type === 'search' && (url = url_search);
 
 		const data = await fetch(url);
 		const json = await data.json();
@@ -62,6 +64,7 @@ export default function Gallery() {
 
 	useEffect(() => {
 		fetchFlickr({ type: 'user', id: myID });
+		//fetchFlickr({ type: 'search', keyword: 'ocean' });
 	}, []);
 
 	return (
