@@ -26,7 +26,7 @@ export default function Gallery() {
 			<div className='frame'>
 				<Masonry
 					elementType={'div'}
-					options={{ transitionDuration: 0.5 }}
+					options={{ transitionDuration: '0.5s' }}
 					disableImagesLoaded={false}
 					updateOnEachImageLoad={false}
 				>
