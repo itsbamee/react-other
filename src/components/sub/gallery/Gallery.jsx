@@ -11,6 +11,7 @@ export default function Gallery() {
 	let [IsUser, setIsUser] = useState(myID);
 	let [CurrentType, setCurrentType] = useState('mine');
 	let [IsOpen, setIsOpen] = useState(false);
+	const [Index, setIndex] = useState(0);
 	const refElBtnSet = useRef(null);
 	const refElInput = useRef(null);
 
@@ -87,8 +88,9 @@ export default function Gallery() {
 		setCurrentType('search');
 	};
 
-	const handleModal = (e) => {
+	const handleModal = (idx) => {
 		setIsOpen(true);
+		setIndex(idx);
 	};
 
 	useEffect(() => {
@@ -126,7 +128,7 @@ export default function Gallery() {
 							return (
 								<article key={idx}>
 									<div className='inner'>
-										<div className='pic' onClick={handleModal}>
+										<div className='pic' onClick={() => handleModal(idx)}>
 											<img
 												src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_w.jpg`}
 												alt={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
@@ -151,7 +153,12 @@ export default function Gallery() {
 			</Layout>
 
 			{/* 모달 호출시 출력유무를 결정하는 state값과 state변경함수를 Modal에 props로 전달 - 이유: 모달이 열고 닫는거는 부모가 아닌 자식 컴포넌트에 결정하게 하기 위함 */}
-			<Modal IsOpen={IsOpen} setIsOpen={setIsOpen}></Modal>
+			<Modal IsOpen={IsOpen} setIsOpen={setIsOpen}>
+				<img
+					src={`https://live.staticflickr.com/${Pics[Index]?.server}/${Pics[Index]?.id}_${Pics[Index]?.secret}_b.jpg`}
+					alt='pic'
+				/>
+			</Modal>
 		</>
 	);
 }
