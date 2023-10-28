@@ -9,6 +9,7 @@ export default function Gallery() {
 	const [Pics, setPics] = useState([]);
 	let [IsUser, setIsUser] = useState(myID);
 	const refElBtnSet = useRef(null);
+	const refElInput = useRef(null);
 
 	const fetchFlickr = async (opt) => {
 		console.log('fetching again...');
@@ -63,6 +64,14 @@ export default function Gallery() {
 		fetchFlickr({ type: 'user', id: e.target.innerText });
 	};
 
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		const tags = refElInput.current.value;
+		setIsUser('');
+		activateBtn(e);
+		fetchFlickr({ type: 'search', keyword: tags });
+	};
+
 	useEffect(() => {
 		fetchFlickr({ type: 'user', id: myID });
 		//fetchFlickr({ type: 'search', keyword: 'landscape' });
@@ -78,8 +87,8 @@ export default function Gallery() {
 					</button>
 				</nav>
 
-				<form>
-					<input type='text' placeholder='Search' />
+				<form onSubmit={handleSubmit}>
+					<input type='text' placeholder='Search' ref={refElInput} />
 					<LuSearch className='btnSearch' fontSize={20} color={'#bbb'} />
 				</form>
 			</article>
