@@ -30,6 +30,7 @@ export default function Gallery() {
 
 		const data = await fetch(url);
 		const json = await data.json();
+		if (json.photos.photo.length === 0) return alert('해당 검색어의 결과값이 없습니다.');
 		setPics(json.photos.photo);
 	};
 
@@ -67,9 +68,11 @@ export default function Gallery() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const tags = refElInput.current.value;
+		refElInput.current.value = '';
+		if (!tags.trim()) return;
 		setIsUser('');
-		activateBtn(e);
 		fetchFlickr({ type: 'search', keyword: tags });
+		activateBtn(e);
 	};
 
 	useEffect(() => {
@@ -89,7 +92,9 @@ export default function Gallery() {
 
 				<form onSubmit={handleSubmit}>
 					<input type='text' placeholder='Search' ref={refElInput} />
-					<LuSearch className='btnSearch' fontSize={20} color={'#bbb'} />
+					<button className='btnSearch'>
+						<LuSearch fontSize={20} color={'#bbb'} />
+					</button>
 				</form>
 			</article>
 
