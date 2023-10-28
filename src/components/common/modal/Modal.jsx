@@ -26,7 +26,7 @@ export default function Modal({ IsOpen, setIsOpen, children }) {
 						className='con'
 						initial={{ opacity: 0, rotate: 50 }}
 						animate={{ opacity: 1, rotate: 0, transition: { delay: 1 } }}
-						exit={{ opacity: 0, rotate: -50 }}
+						exit={{ opacity: 0, rotate: 0, scale: 1.5, transition: { delay: 1 } }}
 					>
 						{children}
 					</motion.div>
