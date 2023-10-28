@@ -135,6 +135,24 @@
 
 .mobile {
 	.gallery {
+		.controls {
+			.btnSet {
+				width: 100%;
+				margin-bottom: 2rem;
+				justify-content: space-between;
+				button {
+					width: 45%;
+				}
+			}
+			form {
+				width: 100%;
+				justify-content: space-between;
+
+				input {
+					width: calc(100% - 30px);
+				}
+			}
+		}
 		.frame {
 			article {
 				width: 100%;
