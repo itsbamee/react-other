@@ -10,7 +10,7 @@ export default function Gallery() {
 	const [Pics, setPics] = useState([]);
 	let [IsUser, setIsUser] = useState(myID);
 	let [CurrentType, setCurrentType] = useState('mine');
-	let [IsOpen, setIsOpen] = useState(true);
+	let [IsOpen, setIsOpen] = useState(false);
 	const refElBtnSet = useRef(null);
 	const refElInput = useRef(null);
 
@@ -87,6 +87,10 @@ export default function Gallery() {
 		setCurrentType('search');
 	};
 
+	const handleModal = (e) => {
+		setIsOpen(true);
+	};
+
 	useEffect(() => {
 		fetchFlickr({ type: 'user', id: myID });
 		//fetchFlickr({ type: 'search', keyword: 'landscape' });
@@ -122,7 +126,7 @@ export default function Gallery() {
 							return (
 								<article key={idx}>
 									<div className='inner'>
-										<div className='pic'>
+										<div className='pic' onClick={handleModal}>
 											<img
 												src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_w.jpg`}
 												alt={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
