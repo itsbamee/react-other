@@ -5,20 +5,13 @@ import { RxReset } from 'react-icons/rx';
 import { useRef, useState, useEffect } from 'react';
 
 function Comunity() {
-	//순서1- 로컬저장소의 값을 가져와서 객체화한다음 리턴하는 함수
 	const getLocalData = () => {
-		//처음 컴포넌트 마운트시에는 로컬저장소에 아무런 값이 없기 때문에 undefined리턴하면서 에러발생
 		const data = localStorage.getItem('posts');
-
-		//로컬저장소에 값이 있을때에만 객체로 변환해서 리턴
 		if (data) return JSON.parse(data);
-		//처음 마운트시 로컬저장소에 값이 없으면 빈배열을 대신 리턴
 		else return [];
 	};
-
 	const refInput = useRef(null);
 	const refTextarea = useRef(null);
-	//순서2-컴포넌트가 마운트되자마다 로컬저장소에서 가져온 배열값을 Posts state에 옮겨담음
 	const [Posts, setPosts] = useState(getLocalData());
 	console.log(Posts);
 
@@ -36,8 +29,15 @@ function Comunity() {
 		resetPost();
 	};
 
+	const deletePost = (delIndex) => {
+		console.log(delIndex);
+		//Post.filter로 전달되는 삭제순번과 현재반복되는 값의 순번이 같지가 않은것만 배열로 반환 (삭제순번값만 제외하고 반환하기 때문에 결과적으로 삭제와 동일한 기능)
+		//삭제 순번글만 제외한 나머지 배열값을 다시 setPosts로 기존 Posts값을 변경하면 컴포넌트가 재랜더링되면서 해당 글만 제외만 나머지글만 출력
+		//해당 구문에서는 filter자체가 불변성을 유지하면서 새로운 배열을 리턴하기 때문에 굳이 전개 연산자로 기존 State값을 deep copy할 필요가 없음
+		setPosts(Posts.filter((post, idx) => delIndex !== idx));
+	};
+
 	useEffect(() => {
-		//순서5- Posts값이 변경될떄마다 해당값을 문자화해서 로컬저장소에 저장
 		localStorage.setItem('posts', JSON.stringify(Posts));
 	}, [Posts]);
 
@@ -52,7 +52,6 @@ function Comunity() {
 						<button onClick={resetPost}>
 							<RxReset fontSize={20} color={'#555'} />
 						</button>
-						{/* 순서4- 글작성시 State값 변경처리 */}
 						<button onClick={createPost}>
 							<TfiWrite fontSize={20} color={'#555'} />
 						</button>
@@ -60,7 +59,6 @@ function Comunity() {
 				</div>
 
 				<div className='showBox'>
-					{/* 순서3- 로컬저장소로부터 옮겨담아진 state값을 반복돌면서 글 목록 출력 */}
 					{Posts.map((post, idx) => (
 						<article key={idx}>
 							<div className='txt'>
@@ -69,7 +67,7 @@ function Comunity() {
 							</div>
 							<nav>
 								<button>Edit</button>
-								<button>Delete</button>
+								<button onClick={() => deletePost(idx)}>Delete</button>
 							</nav>
 						</article>
 					))}
