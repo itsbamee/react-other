@@ -25,15 +25,22 @@ function Comunity() {
 			resetPost();
 			return alert('제목과 본문을 모두 입력하세요.');
 		}
-		setPosts([{ title: refInput.current.value, content: refTextarea.current.value }, ...Posts]);
+
+		//현재 전세계 표준 시간값에서 getTime()을 호출하면 표준 시간값을 밀리세컨드단위의 숫자값으로 반환
+		//표준시값에 한국시간에 9시간 빠르므로 9시간에 대한 밀리세컨드값을 더해줌 (korTime)
+		//korTime : 한국시간대를 밀리세컨드로 반환한값
+		const korTime = new Date().getTime() + 1000 * 60 * 60 * 9;
+
+		//new Date(한국밀리세컨드시간값) --> 한국 시간값을 기준으로해서 시간객체값 반환
+
+		setPosts([
+			{ title: refInput.current.value, content: refTextarea.current.value, date: new Date(korTime) },
+			...Posts,
+		]);
 		resetPost();
 	};
 
 	const deletePost = (delIndex) => {
-		console.log(delIndex);
-		//Post.filter로 전달되는 삭제순번과 현재반복되는 값의 순번이 같지가 않은것만 배열로 반환 (삭제순번값만 제외하고 반환하기 때문에 결과적으로 삭제와 동일한 기능)
-		//삭제 순번글만 제외한 나머지 배열값을 다시 setPosts로 기존 Posts값을 변경하면 컴포넌트가 재랜더링되면서 해당 글만 제외만 나머지글만 출력
-		//해당 구문에서는 filter자체가 불변성을 유지하면서 새로운 배열을 리턴하기 때문에 굳이 전개 연산자로 기존 State값을 deep copy할 필요가 없음
 		setPosts(Posts.filter((_, idx) => delIndex !== idx));
 	};
 
