@@ -7,8 +7,13 @@ import { useRef, useState, useEffect } from 'react';
 function Comunity() {
 	//순서1- 로컬저장소의 값을 가져와서 객체화한다음 리턴하는 함수
 	const getLocalData = () => {
+		//처음 컴포넌트 마운트시에는 로컬저장소에 아무런 값이 없기 때문에 undefined리턴하면서 에러발생
 		const data = localStorage.getItem('posts');
-		return JSON.parse(data);
+
+		//로컬저장소에 값이 있을때에만 객체로 변환해서 리턴
+		if (data) return JSON.parse(data);
+		//처음 마운트시 로컬저장소에 값이 없으면 빈배열을 대신 리턴
+		else return [];
 	};
 
 	const refInput = useRef(null);
