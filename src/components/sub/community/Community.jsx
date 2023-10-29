@@ -44,8 +44,14 @@ function Comunity() {
 				<div className='showBox'>
 					{Posts.map((post, idx) => (
 						<article key={idx}>
-							<h2>{post.title}</h2>
-							<p>{post.content}</p>
+							<div className='txt'>
+								<h2>{post.title}</h2>
+								<p>{post.content}</p>
+							</div>
+							<nav>
+								<button>Edit</button>
+								<button>Delete</button>
+							</nav>
 						</article>
 					))}
 				</div>
