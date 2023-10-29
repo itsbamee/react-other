@@ -1,7 +1,7 @@
 import './Community.scss';
 import Layout from '../../common/layout/Layout';
 import { TfiWrite } from 'react-icons/tfi';
-import { ImCancelCircle } from 'react-icons/im';
+import { RxReset } from 'react-icons/rx';
 import { useRef } from 'react';
 
 function Comunity() {
@@ -13,11 +13,11 @@ function Comunity() {
 			<div className='wrap'>
 				<div className='inputBox'>
 					<input type='text' placeholder='Write Title' ref={refInput} />
-					<textarea cols='30' rows='3' placeholder='Write Content Message' ref={refTextarea}></textarea>
+					<textarea cols='30' rows='5' placeholder='Write Content Message' ref={refTextarea}></textarea>
 
 					<nav>
 						<button>
-							<ImCancelCircle fontSize={20} color={'#555'} />
+							<RxReset fontSize={20} color={'#555'} />
 						</button>
 						<button>
 							<TfiWrite fontSize={20} color={'#555'} />
