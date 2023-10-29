@@ -97,7 +97,6 @@ export default function Gallery() {
 
 	useEffect(() => {
 		fetchFlickr({ type: 'user', id: myID });
-		//fetchFlickr({ type: 'search', keyword: 'landscape' });
 	}, []);
 
 	return (
