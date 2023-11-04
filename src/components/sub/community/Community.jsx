@@ -25,13 +25,7 @@ function Comunity() {
 			resetPost();
 			return alert('제목과 본문을 모두 입력하세요.');
 		}
-
-		//현재 전세계 표준 시간값에서 getTime()을 호출하면 표준 시간값을 밀리세컨드단위의 숫자값으로 반환
-		//표준시값에 한국시간에 9시간 빠르므로 9시간에 대한 밀리세컨드값을 더해줌 (korTime)
-		//korTime : 한국시간대를 밀리세컨드로 반환한값
 		const korTime = new Date().getTime() + 1000 * 60 * 60 * 9;
-
-		//new Date(한국밀리세컨드시간값) --> 한국 시간값을 기준으로해서 시간객체값 반환
 
 		setPosts([
 			{ title: refInput.current.value, content: refTextarea.current.value, date: new Date(korTime) },
@@ -67,10 +61,6 @@ function Comunity() {
 
 				<div className='showBox'>
 					{Posts.map((post, idx) => {
-						//현재시간값이 State에 옮겨담아지는 순간에는 객체값이고
-						//다음번 렌더링 싸이클에서 useEffect에 의해 문자로 변환된다음 로컬저장소에 저장됨
-						//날자값을 받는 첫번째 렌더링 타임에는 날짜값이 객체이므로 split구문에서 오류발생
-						//해결방법은 처음 렌더링을 도는 시점에서 날짜를 강제로 문자화한다음 출력처리
 						const stringDate = JSON.stringify(post.date);
 						const textedDate = stringDate.split('T')[0].split('"')[1].split('-').join('.');
 						return (
@@ -96,20 +86,10 @@ function Comunity() {
 export default Comunity;
 
 /*
-	Create (글작성) "POST"
-	Read (글 불러오기) "GET"
-	Update (글 수정) "PUT"
-	Delete (글 삭제) "DELETE"
-
-	RESTful API : DB의 구조적으로 변경하기위한 개발 방법론
-
-	로컬저장소: LocalStorage
-	- 모든 브라우저가 내장하고 있는 경량의 저장공간
-	- 문자값만 저장가능 (5MB)
-	- 객체값을 문자화시켜서 저장
-	- 로컬저장소 값을 불러올때는 반대로 문자형태를 JSON형태로 객체로 parsing해서 가져옴
-
-	localStorage 메서드
-	localStorage.setItem('키',문자화된 데이터) :로컬저장소에 데이터 저장
-	localStorage.getItem('키') : 해당 데이터는 문자값으로 리턴되기 때문에 다시 객체형태로 parsing처리 필요
+	글수정 로직 단계
+	1. 각 포스트에서 수정 버튼 클릭시 해당 객체에 enableUpdate=true라는 프로퍼티추가후 state저장
+	2. 반복돌며 렌더링시 반복도는 객체에 enableUpdate값이 true면 제목, 본문을 폼요소 출력하도록 분기처리
+	3. 수정모드일때에는 수정취소, 수정완료 버튼 생성
+	4. 수정취소버튼 클릭시 출력모드로 변경 (enableUpdat=false처리)
+	5. 수정완료버튼 클릭시 수정모드에 있는 value값을 가져와서 state에 저장한뒤 다시 출력모드로 변경처리
 */
