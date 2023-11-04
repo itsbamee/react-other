@@ -12,6 +12,8 @@ function Comunity() {
 	};
 	const refInput = useRef(null);
 	const refTextarea = useRef(null);
+	const editInput = useRef(null);
+	const editTextarea = useRef(null);
 	const [Posts, setPosts] = useState(getLocalData());
 	console.log(Posts);
 
@@ -57,6 +59,23 @@ function Comunity() {
 		);
 	};
 
+	const updatePost = (updateIndex) => {
+		if (!editInput.current.value.trim() || !editTextarea.current.value.trim())
+			return alert('수정할 글의 제목과 본문을 모두 입력하세요.');
+		setPosts(
+			Posts.map((post, idx) => {
+				//전달된 수정번호와 현재 반복도는 post순번이 같으면
+				if (updateIndex === idx) {
+					//수정모드의 폼요소값을 담아주고 enableUpdate값을 false로 변경해서 다시 출력모드 변경
+					post.title = editInput.current.value;
+					post.content = editTextarea.current.value;
+					post.enableUpdate = false;
+				}
+				return post;
+			})
+		);
+	};
+
 	useEffect(() => {
 		localStorage.setItem('posts', JSON.stringify(Posts));
 	}, [Posts]);
@@ -87,12 +106,12 @@ function Comunity() {
 							return (
 								<article key={idx}>
 									<div className='txt'>
-										<input type='text' defaultValue={post.title} />
-										<textarea defaultValue={post.content}></textarea>
+										<input type='text' defaultValue={post.title} ref={editInput} />
+										<textarea defaultValue={post.content} ref={editTextarea}></textarea>
 									</div>
 									<nav>
 										<button onClick={() => disableUpdate(idx)}>Cancel</button>
-										<button>Update</button>
+										<button onClick={() => updatePost(idx)}>Update</button>
 									</nav>
 								</article>
 							);
