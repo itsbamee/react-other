@@ -15,6 +15,7 @@ function Comunity() {
 	const editInput = useRef(null);
 	const editTextarea = useRef(null);
 	const [Posts, setPosts] = useState(getLocalData());
+	const [Allowed, setAllowed] = useState(true);
 	console.log(Posts);
 
 	const resetPost = () => {
@@ -41,6 +42,10 @@ function Comunity() {
 	};
 
 	const enableUpdate = (editIndex) => {
+		//Allowed값이 true일때에만 수정모드 진입가능하게 처리
+		if (!Allowed) return;
+		//일단 수정모드에 진입하면 Allowed값을 false로 변경해서 추가적으로 수정모드 진입불가처리
+		setAllowed(false);
 		setPosts(
 			//기존의 Posts배열을 반복돌면서 파라미터전달된 editIndex순번에 해다는 post객체에만 enableUpdate=true값을 추가한 객체의 배열값을 다시 기존 Posts에 변경
 			Posts.map((post, idx) => {
@@ -51,6 +56,8 @@ function Comunity() {
 	};
 
 	const disableUpdate = (cancelIndex) => {
+		//수정취소시 다시 Allowed값 true변경해서 수정모드 가능하게 변경
+		setAllowed(true);
 		setPosts(
 			Posts.map((post, idx) => {
 				if (cancelIndex === idx) post.enableUpdate = false;
@@ -62,6 +69,8 @@ function Comunity() {
 	const updatePost = (updateIndex) => {
 		if (!editInput.current.value.trim() || !editTextarea.current.value.trim())
 			return alert('수정할 글의 제목과 본문을 모두 입력하세요.');
+		//수정완료시에도 다시 Allowed값 true변경해서 수정모드 가능하게 변경
+		setAllowed(true);
 		setPosts(
 			Posts.map((post, idx) => {
 				//전달된 수정번호와 현재 반복도는 post순번이 같으면
