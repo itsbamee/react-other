@@ -58,7 +58,7 @@
 				height: 25vh;
 				background: #efefef;
 				padding: 20px;
-				margin-bottom: 20px;
+				//margin-bottom: 20px;
 				display: flex;
 				flex-wrap: wrap;
 				align-content: space-between;
@@ -110,6 +110,54 @@
 							color: orangered;
 						}
 					}
+				}
+			}
+		}
+	}
+}
+
+//laptop
+.laptop {
+	.community {
+		.wrap {
+			.showBox {
+				article {
+					width: calc((100% - var(--boxGap) * (var(--countColumn-2) - 1)) / var(--countColumn-2));
+				}
+			}
+		}
+	}
+}
+//tablet
+.tablet,
+.mobile {
+	.community {
+		.wrap {
+			.inputBox {
+				width: 100%;
+				padding-right: 0;
+				margin-bottom: 100px;
+			}
+			.showBox {
+				width: 100%;
+				border-left: none;
+				padding-left: 0;
+
+				article {
+					width: calc((100% - var(--boxGap) * (var(--countColumn-2) - 1)) / var(--countColumn-2));
+				}
+			}
+		}
+	}
+}
+
+//mobile
+.mobile {
+	.community {
+		.wrap {
+			.showBox {
+				article {
+					width: calc((100% - var(--boxGap) * (var(--countColumn-1) - 1)) / var(--countColumn-1));
 				}
 			}
 		}
