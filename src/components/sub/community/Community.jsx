@@ -71,6 +71,7 @@ function Comunity() {
 							<div className='txt'>
 								<h2>{post.title}</h2>
 								<p>{post.content}</p>
+								<span>{post.date.split('T')[0].split('-').join('.')} </span>
 							</div>
 							<nav>
 								<button>Edit</button>
