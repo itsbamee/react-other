@@ -49,11 +49,12 @@ fieldset {
 input,
 textarea {
 	&::placeholder {
-		font-size: 0.9rem;
+		font-size: 1.3rem;
 		color: var(--pointColor);
 	}
 }
 select {
+	font-size: 1.3rem;
 	color: var(--pointColor);
 }
 html {
