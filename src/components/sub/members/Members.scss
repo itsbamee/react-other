@@ -1,0 +1,44 @@
+.members {
+	.wrap {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+
+		.infoBox {
+			width: 30%;
+			padding-right: 50px;
+			border-right: 1px solid transparent;
+			border-image: radial-gradient(#bbb 90%, transparent) 1;
+
+			h2 {
+				font-size: 1.5rem;
+			}
+		}
+		.formBox {
+			width: 70%;
+			padding-left: 50px;
+
+			table {
+				width: 100%;
+
+				td {
+					padding: 20px 20px;
+					//border-bottom: 1px solid #888;
+					position: relative;
+
+					&::after {
+						content: '';
+						display: block;
+						width: calc(100% - 40px);
+						height: 1px;
+						background: #888;
+						position: absolute;
+						bottom: 0;
+						left: 20px;
+					}
+				}
+			}
+		}
+	}
+}
