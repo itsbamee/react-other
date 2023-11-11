@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Contact.scss';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function Contact() {
 	const { kakao } = window;
@@ -15,6 +16,7 @@ export default function Contact() {
 			imgSize: new kakao.maps.Size(232, 99),
 			imgPos: { offset: new kakao.maps.Point(116, 99) },
 		},
+
 		{
 			title: '넥슨 본사',
 			latlng: new kakao.maps.LatLng(37.40211707077346, 127.10344953763003),
@@ -50,9 +52,11 @@ export default function Contact() {
 			<article id='map' ref={mapFrame}></article>
 
 			<ul className='branch'>
-				<li onClick={() => setIndex(0)}>삼성동 코엑스</li>
-				<li onClick={() => setIndex(1)}>넥슨 본사</li>
-				<li onClick={() => setIndex(2)}>서울 시청</li>
+				{info.current.map((el, idx) => (
+					<li key={idx} className={idx === Index ? 'on' : ''} onClick={() => setIndex(idx)}>
+						{el.title}
+					</li>
+				))}
 			</ul>
 		</Layout>
 	);
