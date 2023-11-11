@@ -3,19 +3,20 @@ import Layout from '../../common/layout/Layout';
 import './Contact.scss';
 
 export default function Contact() {
-	//JSX컴포넌트에 에서는 cdn을통해 window전역객체에 받아지는 kakao객체에 자동 접근이 안되니
-	//비구조화할당으로 직접 해당 객체 추출
 	const { kakao } = window;
-	//api적용할 요소도 가상돔이기 때문에 참조객체에 연결
 	const mapFrame = useRef(null);
+
 	const mapOption = {
-		center: new kakao.maps.LatLng(33.450701, 126.570667),
+		center: new kakao.maps.LatLng(37.512759, 127.060858),
 		level: 3,
 	};
+	const marker = new kakao.maps.Marker({
+		position: mapOption.center,
+	});
 
 	useEffect(() => {
-		//인스턴스 복사는 컴포넌트 마운트시 처리
-		new kakao.maps.Map(mapFrame.current, mapOption);
+		const map = new kakao.maps.Map(mapFrame.current, mapOption);
+		marker.setMap(map);
 	}, []);
 
 	return (
