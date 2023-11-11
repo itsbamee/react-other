@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 export default function Contact() {
 	const { kakao } = window;
 	const mapFrame = useRef(null);
+	const mapInstance = useRef(null);
 	const [Index, setIndex] = useState(0);
 
 	const info = useRef([
@@ -42,10 +43,21 @@ export default function Contact() {
 		),
 	});
 
+	const setCenter = () => {
+		mapInstance.current.setCenter(info.current[Index].latlng);
+	};
+
 	useEffect(() => {
-		const map = new kakao.maps.Map(mapFrame.current, { center: info.current[Index].latlng });
-		marker.setMap(map);
+		mapFrame.current.innerHTML = '';
+		mapInstance.current = new kakao.maps.Map(mapFrame.current, { center: info.current[Index].latlng });
+		marker.setMap(mapInstance.current);
+
+		window.addEventListener('resize', setCenter);
 	}, [Index]);
+
+	useEffect(() => {
+		return () => window.removeEventListener('resize', setCenter);
+	}, []);
 
 	return (
 		<Layout title={'Contact us'}>
