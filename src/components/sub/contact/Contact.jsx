@@ -6,27 +6,22 @@ export default function Contact() {
 	const { kakao } = window;
 	const mapFrame = useRef(null);
 
-	const mapOption = {
-		//위치값 정밀하게 보정하는 법
-		//기존 구글지도 위치값 복사뒤 카카오예제의 클릭한위치 마커표소 직접해보기에서
-		//해당 코드 붙여넣기하고 원하는 지점을 찍으면 아래와같이 정밀한 수치값을 확인가능
-		center: new kakao.maps.LatLng(37.51272797391666, 127.06076771220832),
-		level: 3,
-	};
-
-	//마커이미지 인스턴스를 생성하기 위한 정보값들
-	const imgSrc = `${process.env.PUBLIC_URL}/img/marker1.png`;
-	const imgSize = new kakao.maps.Size(232, 99);
-	const imgPos = { offset: new kakao.maps.Point(116, 99) };
-	const markerImage = new kakao.maps.MarkerImage(imgSrc, imgSize, imgPos);
+	const info = [
+		{
+			latlng: new kakao.maps.LatLng(37.51272797391666, 127.06076771220832),
+			imgSrc: `${process.env.PUBLIC_URL}/img/marker1.png`,
+			imgSize: new kakao.maps.Size(232, 99),
+			imgPos: { offset: new kakao.maps.Point(116, 99) },
+		},
+	];
 
 	const marker = new kakao.maps.Marker({
-		position: mapOption.center,
-		image: markerImage,
+		position: info[0].latlang,
+		image: new kakao.maps.MarkerImage(info[0].imgSrc, info[0].imgSize, info[0].imgPos),
 	});
 
 	useEffect(() => {
-		const map = new kakao.maps.Map(mapFrame.current, mapOption);
+		const map = new kakao.maps.Map(mapFrame.current, { center: info[0].latlng });
 		marker.setMap(map);
 	}, []);
 
