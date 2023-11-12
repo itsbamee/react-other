@@ -49,13 +49,21 @@ export default function Contact() {
 
 	const sendEmail = (e) => {
 		e.preventDefault();
+		const [user, email] = form.current.querySelectorAll('input');
+		const txtArea = form.current.querySelector('textarea');
+
+		if (!user.value || !email.value || !txtArea.value)
+			return alert('이름, 답장받을 메일주소, 문의내용을 모두 입력하세요.');
 
 		emailjs.sendForm('service_blebqd2', 'template_93zpfge', form.current, '23g8RepczesqKPoIX').then(
 			(result) => {
-				console.log(result.text);
+				alert('문의내용이 성공적으로 전달되었습니다.');
+				[user, email, txtArea].forEach((el) => (el.value = ''));
 			},
 			(error) => {
-				console.log(error.text);
+				alert('문의내용 전송에 실패했습니다.');
+				console.error(error);
+				[user, email, txtArea].forEach((el) => (el.value = ''));
 			}
 		);
 	};
@@ -112,6 +120,7 @@ export default function Contact() {
 					<label>Message</label>
 					{/* message :템플릿에서 문의메세지 변수명 */}
 					<textarea name='message' />
+					<input type='reset' value='Reset' />
 					<input type='submit' value='Send' />
 				</form>
 			</div>
