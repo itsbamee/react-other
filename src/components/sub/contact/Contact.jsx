@@ -9,6 +9,7 @@ export default function Contact() {
 	const mapInstance = useRef(null);
 	const [Index, setIndex] = useState(0);
 	const [Traffic, setTraffic] = useState(false);
+	const [View, setView] = useState(false);
 
 	const info = useRef([
 		{
@@ -60,6 +61,7 @@ export default function Contact() {
 		});
 
 		setTraffic(false);
+		setView(false);
 
 		window.addEventListener('resize', setCenter);
 	}, [Index]);
@@ -77,8 +79,10 @@ export default function Contact() {
 
 	return (
 		<Layout title={'Contact us'}>
-			<article id='map' ref={mapFrame}></article>
-			<article id='view' ref={viewFrame}></article>
+			<div className='container'>
+				<article id='map' ref={mapFrame} className={View ? '' : 'on'}></article>
+				<article id='view' ref={viewFrame} className={View ? 'on' : ''}></article>
+			</div>
 
 			<ul className='branch'>
 				{info.current.map((el, idx) => (
@@ -90,6 +94,7 @@ export default function Contact() {
 
 			<button onClick={setCenter}>위치 초기화</button>
 			<button onClick={() => setTraffic(!Traffic)}>{Traffic ? '교통정보 끄기' : '교통정보 보기'}</button>
+			<button onClick={() => setView(!View)}>{View ? '지도보기' : '로드뷰보기'}</button>
 		</Layout>
 	);
 }
