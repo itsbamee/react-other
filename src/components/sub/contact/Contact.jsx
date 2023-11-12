@@ -5,6 +5,7 @@ import './Contact.scss';
 export default function Contact() {
 	const { kakao } = window;
 	const mapFrame = useRef(null);
+	const viewFrame = useRef(null);
 	const mapInstance = useRef(null);
 	const [Index, setIndex] = useState(0);
 	const [Traffic, setTraffic] = useState(false);
@@ -43,9 +44,7 @@ export default function Contact() {
 		),
 	});
 
-	const setCenter = () => {
-		mapInstance.current.setCenter(info.current[Index].latlng);
-	};
+	const setCenter = () => mapInstance.current.setCenter(info.current[Index].latlng);
 
 	useEffect(() => {
 		mapFrame.current.innerHTML = '';
@@ -54,6 +53,11 @@ export default function Contact() {
 		mapInstance.current.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
 		mapInstance.current.setZoomable(false);
 		marker.setMap(mapInstance.current);
+
+		//roadview setting
+		new kakao.maps.RoadviewClient().getNearestPanoId(info.current[Index].latlng, 50, (id) => {
+			new kakao.maps.Roadview(viewFrame.current).setPanoId(id, info.current[Index].latlng);
+		});
 
 		setTraffic(false);
 
@@ -74,6 +78,7 @@ export default function Contact() {
 	return (
 		<Layout title={'Contact us'}>
 			<article id='map' ref={mapFrame}></article>
+			<article id='view' ref={viewFrame}></article>
 
 			<ul className='branch'>
 				{info.current.map((el, idx) => (
