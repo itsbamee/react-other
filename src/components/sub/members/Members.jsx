@@ -1,4 +1,3 @@
-import { useSplitText } from '../../../hooks/useSplitText';
 import Layout from '../../common/layout/Layout';
 import './Members.scss';
 import { useState, useRef, useEffect } from 'react';
@@ -49,6 +48,17 @@ export default function Members() {
 		if (value.interest.length === 0) {
 			errs.interests = '취미를 하나이상 선택하세요.';
 		}
+		if (!value.email || !/@/.test(value.email)) {
+			errs.email = '이메일주소에는 @를 포함해야 합니다.';
+		} else {
+			if (!value.email.split('@')[0] || !value.email.split('@')[1]) {
+				errs.email = '@앞뒤로 문자값이 있어야 합니다.';
+			} else {
+				if (!value.email.split('@')[1].split('.')[0] || !value.email.split('@')[1].split('.')[1]) {
+					errs.email = '이메일 .앞뒤로 문자값이 있어야 합니다.';
+				}
+			}
+		}
 		return errs;
 	};
 
@@ -89,6 +99,7 @@ export default function Members() {
 										</td>
 										<td>
 											<input type='text' name='email' placeholder='Email' value={Val.email} onChange={handleChange} />
+											{Errs.email && <p>{Errs.email}</p>}
 										</td>
 									</tr>
 
