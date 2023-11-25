@@ -2,20 +2,29 @@ import './Btns.scss';
 import { useRef, useEffect, useState } from 'react';
 import Anime from '../../../asset/anime.js';
 
-// document.querySelector vs useRef(DOM) (참고로 둘다 realDOM을 제어)
-// document.querySelector : 이미 이전 렌더링 사이클에서 돔으로 변경된 신뢰할수 없는 예전 돔
-// useRef: 똑같이 RealDOM을 담긴하지만 앞으로 realDOM으로 변화될 신뢰할수 있는 최신 돔 상태
+//useCallback: 함수자체를 메모이제이션해서 해당 함수를 재활용
+//useMemo: 함수의 리턴값 자체를 메모이제이션
+//meno: 컴포넌트 자체를 메모이제이션
 
-//State vs useRef 해당 값의 변경및 적용 시점
-//state값은 해당 렌더링사이클에서 값이 변경되는 것은 맞지만 실제 그 값이 적용되는 시점은 다음번 렌더링 사이클
-//useRef은 해당 렌더링사이클에 값도 변경되고 바로 반영도 됨
+//고차컴포넌트(hoc): high order component
+//인수로 컴포넌트를 전달받아서 새로운 컴포넌트를 반환
+
+//hook의 조건
+//1. 이름이 use로 시작
+//2. 커스텀훅은 무조건 함수나 리턴값을 반환
+//3. 다른 hook이나 핸들러함수 안쪽에 호출이 불가, 컴포넌트 함수 안쪽에서만 호출 가능
+
+//throttle : 강제로 이벤트핸들러 호출횟수를 압박해서 줄이는 기법
+//scroll, resize, mousemove, mousewheel : 단기간에 많은 핸들러를 호출하는 이벤트 (1초 60번, 화면주사율 60hz)
 
 function Btns() {
+	console.log('btns');
 	const [Num, setNum] = useState(0);
 	const secs = useRef(null);
 	const btns = useRef(null);
 
 	const activation = () => {
+		console.log('activation');
 		const scroll = window.scrollY;
 		secs.current.forEach((el, idx) => {
 			if (scroll >= el.offsetTop - window.innerHeight / 2) {
@@ -33,7 +42,7 @@ function Btns() {
 	};
 
 	useEffect(() => {
-		secs.current = document.querySelectorAll('.myScroll');
+		secs.current = btns.current.parentElement.querySelectorAll('.myScroll');
 		setNum(secs.current.length);
 		window.addEventListener('scroll', activation);
 
@@ -47,7 +56,7 @@ function Btns() {
 	return (
 		<ul className='btns' ref={btns}>
 			{Array(Num)
-				.fill()
+				.fill('abc')
 				.map((_, idx) => {
 					return <li key={_ + idx} onClick={() => handleClick(idx)}></li>;
 				})}
