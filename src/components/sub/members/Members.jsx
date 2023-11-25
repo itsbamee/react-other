@@ -33,6 +33,7 @@ export default function Members() {
 	};
 
 	const check = (value) => {
+		console.log('check');
 		const txt = /[a-zA-Z]/;
 		const num = /[0-9]/;
 		const spc = /[!@#$%^&*()_+]/;
@@ -112,13 +113,7 @@ export default function Members() {
 									{/* userid, email (handleChange) */}
 									<tr>
 										<td>
-											<input
-												type='text'
-												name='userid'
-												placeholder='User ID'
-												value={Val.userid}
-												onChange={handleChange}
-											/>
+											<input type='text' name='userid' placeholder='User ID' value={Val.userid} onChange={handleChange} />
 											{Errs.userid && <p>{Errs.userid}</p>}
 										</td>
 										<td>
@@ -130,23 +125,11 @@ export default function Members() {
 									{/* pwd1, pwd2 (handleChange) */}
 									<tr>
 										<td>
-											<input
-												type='password'
-												name='pwd1'
-												placeholder='Password'
-												value={Val.pwd1}
-												onChange={handleChange}
-											/>
+											<input type='password' name='pwd1' placeholder='Password' value={Val.pwd1} onChange={handleChange} />
 											{Errs.pwd1 && <p>{Errs.pwd1}</p>}
 										</td>
 										<td>
-											<input
-												type='password'
-												name='pwd2'
-												placeholder='Re-Password'
-												value={Val.pwd2}
-												onChange={handleChange}
-											/>
+											<input type='password' name='pwd2' placeholder='Re-Password' value={Val.pwd2} onChange={handleChange} />
 											{Errs.pwd2 && <p>{Errs.pwd2}</p>}
 										</td>
 									</tr>
@@ -184,13 +167,7 @@ export default function Members() {
 											<input type='checkbox' name='interest' id='sports' defaultValue='sports' onChange={handleCheck} />
 											<label htmlFor='sports'>Sports</label>
 
-											<input
-												type='checkbox'
-												name='interest'
-												id='reading'
-												defaultValue='reading'
-												onChange={handleCheck}
-											/>
+											<input type='checkbox' name='interest' id='reading' defaultValue='reading' onChange={handleCheck} />
 											<label htmlFor='reading'>Reading</label>
 
 											<input type='checkbox' name='interest' id='music' defaultValue='music' onChange={handleCheck} />
@@ -231,3 +208,9 @@ export default function Members() {
 		</Layout>
 	);
 }
+
+/*
+	throttle vs debounce
+	throttle : 물리적으로 핸들러함수 호출자체를 일정횟수로 줄임
+	debounce : 특정 이벤트가 단시간에 반복으로 계속 발생하고 있으면 핸들러함수 호출 자체를 계속 뒤로 밀면서 호출 막음
+*/
