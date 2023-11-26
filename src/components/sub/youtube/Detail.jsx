@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 
 function Detail() {
 	const [Data, setData] = useState(null);
-
 	const { id } = useParams();
 	const params = useRef(id);
 
