@@ -79,6 +79,7 @@ export default function Visual() {
 									/>
 								</p>
 							</div>
+							<h3>{data.snippet.title}</h3>
 						</SwiperSlide>
 					);
 				})}
