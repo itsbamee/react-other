@@ -1,6 +1,5 @@
 import Footer from './components/common/footer/Footer';
 import Header from './components/common/header/Header';
-import Visual from './components/main/visual/Visual';
 import Contact from './components/sub/contact/Contact';
 import Department from './components/sub/department/Department';
 import Community from './components/sub/community/Community';
@@ -13,6 +12,11 @@ import './styles/Variable.scss';
 import './styles/Global.scss';
 import { Route, Switch } from 'react-router-dom';
 import MainWrap from './components/main/mainWrap/MainWrap';
+
+//asset > anime.js
+//mainWrap > Btns.jsx
+//mainWrap > Banner.jsx
+//hooks > useGetCurrentScroll.js
 
 function App() {
 	return (
