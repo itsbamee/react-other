@@ -13,12 +13,14 @@ export default function Banner() {
 	//메모이제이션되는 순간 그안쪽의 모든 값들이 static하게 고정되어 버리므로
 	//의존성배열에 특정 값을 지정해서 해당 값이 변경시에는 임시로 메모이제이션 해제
 	const handleScroll = useCallback(() => {
+		console.log('handleScroll');
 		const modifiedScroll = getScroll(currentEl);
 		titleEl.current.style.transform = `translateX(${modifiedScroll}px)`;
 	}, [getScroll]);
 
 	useEffect(() => {
 		scrollFrame?.addEventListener('scroll', handleScroll);
+		return () => scrollFrame?.removeEventListener('scroll', handleScroll);
 	}, [handleScroll, scrollFrame]);
 
 	return (
