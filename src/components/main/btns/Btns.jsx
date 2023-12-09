@@ -8,6 +8,7 @@ function Btns() {
 	const secs = useRef(null);
 	const btns = useRef(null);
 	const scrollFrame = btns.current?.parentElement.parentElement;
+	console.log(scrollFrame);
 
 	const activation = () => {
 		const scroll = btns.current?.parentElement.parentElement.scrollTop;
@@ -35,10 +36,9 @@ function Btns() {
 	useEffect(() => {
 		secs.current = btns.current.parentElement.querySelectorAll('.myScroll');
 		setNum(secs.current.length);
-		//scroll이벤트는 throttle이 적용된 activation2함수를 연결
 		scrollFrame?.addEventListener('scroll', activation2);
-		return () => scrollFrame?.removeEventListener('scroll', activation2);
-	}, [activation2]);
+		//return () => scrollFrame?.removeEventListener('scroll', activation2);
+	}, [activation2, scrollFrame]);
 
 	useEffect(activation, [Num, scrollFrame]);
 
