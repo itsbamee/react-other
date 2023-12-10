@@ -18,7 +18,7 @@ import { useState } from 'react';
 //mainWrap > Btns.jsx
 //mainWrap > Banner.jsx
 //hooks > useGetCurrentScroll.js
-
+//vercel에 환경변수 추가
 function App() {
 	const [IsDark, setIsDark] = useState(false);
 
