@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 export default function Footer() {
 	//순서4 - 전역 store로부터 데이터 전달 받음
 	const MemberData = useSelector(store => store.memberReducer.members);
-	console.log(MemberData);
 
 	return (
 		<footer>
