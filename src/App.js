@@ -27,13 +27,7 @@ function App() {
 					<MainWrap />
 				</Route>
 				<Route path='/'>
-					<Header
-						isMain={false}
-						IsDark={IsDark}
-						setIsDark={setIsDark}
-						IsMenu={IsMenu}
-						setIsMenu={setIsMenu}
-					/>
+					<Header isMain={false} IsDark={IsDark} setIsDark={setIsDark} IsMenu={IsMenu} setIsMenu={setIsMenu} />
 				</Route>
 			</Switch>
 			<Route path='/department' component={Department} />
