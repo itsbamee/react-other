@@ -42,8 +42,6 @@ function App() {
 						isMain={true}
 						IsDark={IsDark}
 						setIsDark={setIsDark}
-						IsMenu={IsMenu}
-						setIsMenu={setIsMenu}
 					/>
 					<MainWrap />
 				</Route>
@@ -52,8 +50,6 @@ function App() {
 						isMain={false}
 						IsDark={IsDark}
 						setIsDark={setIsDark}
-						IsMenu={IsMenu}
-						setIsMenu={setIsMenu}
 					/>
 				</Route>
 			</Switch>
@@ -86,10 +82,7 @@ function App() {
 				component={Detail}
 			/>
 			<Footer />
-			<Menu
-				IsMenu={IsMenu}
-				setIsMenu={setIsMenu}
-			/>
+			<Menu />
 		</main>
 	);
 }
