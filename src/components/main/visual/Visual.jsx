@@ -8,7 +8,8 @@ import { useCustomText } from '../../../hooks/useText';
 import { useSelector } from 'react-redux';
 
 export default function Visual() {
-	const SlideData = useSelector(store => store.flickrReducer.flickr);
+	const SlideData = useSelector(store => store.youtubeReducer.youtube);
+	console.log(SlideData);
 	const [Index, setIndex] = useState(0);
 	const shortenText = useCustomText('shorten');
 
@@ -16,14 +17,14 @@ export default function Visual() {
 		<figure className='myScroll'>
 			<div className='txtBox'>
 				<ul>
-					{SlideData?.map((tit, idx) => {
+					{SlideData.map((tit, idx) => {
 						if (idx >= 5) return null;
 						return (
 							<li
 								key={idx}
 								className={idx === Index ? 'on' : ''}>
-								<h3>{shortenText(tit?.snippet.title, 50)}</h3>
-								<Link to={`/detail/${tit?.id}`}>
+								<h3>{shortenText(tit.snippet.title, 50)}</h3>
+								<Link to={`/detail/${tit.id}`}>
 									<em>View Detail</em>
 								</Link>
 							</li>
@@ -50,26 +51,26 @@ export default function Visual() {
 						spaceBetween: 50
 					}
 				}}>
-				{SlideData?.map((data, idx) => {
+				{SlideData.map((data, idx) => {
 					if (idx >= 5) return null;
 					return (
 						<SwiperSlide key={idx}>
 							<div className='pic'>
 								<p>
 									<img
-										src={data?.snippet.thumbnails.standard.url}
-										alt={data?.snippet.title}
+										src={data.snippet.thumbnails.standard.url}
+										alt={data.snippet.title}
 									/>
 								</p>
 
 								<p>
 									<img
-										src={data?.snippet.thumbnails.standard.url}
-										alt={data?.snippet.title}
+										src={data.snippet.thumbnails.standard.url}
+										alt={data.snippet.title}
 									/>
 								</p>
 							</div>
-							<h3>{data?.snippet.title}</h3>
+							<h3>{data.snippet.title}</h3>
 						</SwiperSlide>
 					);
 				})}
