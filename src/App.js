@@ -12,17 +12,14 @@ import './styles/Variable.scss';
 import './styles/Global.scss';
 import { Route, Switch } from 'react-router-dom';
 import MainWrap from './components/main/mainWrap/MainWrap';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Menu from './components/common/menu/Menu';
 import { useDispatch, useSelector } from 'react-redux';
 import * as types from './redux/actionType';
 
 function App() {
 	const dispatch = useDispatch();
-	useSelector(store => console.log(store));
-
-	const [IsDark, setIsDark] = useState(false);
-	const [IsMenu, setIsMenu] = useState(false);
+	const IsDark = useSelector(store => store.darkReducer.dark);
 
 	useEffect(() => {
 		Object.keys(types).forEach(actionType => dispatch({ type: types[actionType].start }));
@@ -38,19 +35,11 @@ function App() {
 				<Route
 					exact
 					path='/'>
-					<Header
-						isMain={true}
-						IsDark={IsDark}
-						setIsDark={setIsDark}
-					/>
+					<Header isMain={true} />
 					<MainWrap />
 				</Route>
 				<Route path='/'>
-					<Header
-						isMain={false}
-						IsDark={IsDark}
-						setIsDark={setIsDark}
-					/>
+					<Header isMain={false} />
 				</Route>
 			</Switch>
 			<Route
