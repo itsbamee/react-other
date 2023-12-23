@@ -1,4 +1,7 @@
 //컴포넌트 안쪽에 있는 fetching함수에서 react, DOM API기능을 제외한 순수자바스크립트로 동작하는 순수함수 형태로 변환한 뒤 내보냄
+
+const path = process.env.PUBLIC_URL; //${paht} 만들어준 것
+
 export const fetchFlickr = async opt => {
 	const baseURL = 'https://www.flickr.com/services/rest/?format=json&nojsoncallback=1';
 	const key = process.env.REACT_APP_FLICKR_KEY;
@@ -26,6 +29,18 @@ export const fetchYoutube = async () => {
 	const num = 10;
 	const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&playlistId=${pid}&maxResults=${num}`;
 	const data = await fetch(baseURL);
+	const json = await data.json();
+	return json;
+};
+
+export const fetchDepartment = async () => {
+	const data = await fetch(`${path}/DB/department.json`);
+	const json = await data.json();
+	return json;
+};
+
+export const fetchHistory = async () => {
+	const data = await fetch(`${path}/DB/history.json`);
 	const json = await data.json();
 	return json;
 };
