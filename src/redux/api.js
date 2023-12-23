@@ -1,8 +1,6 @@
-//컴포넌트 안쪽에 있는 fetching함수에서 react, DOM API기능을 제외한 순수자바스크립트로 동작하는 순수함수 형태로 변환한 뒤 내보냄
+const path = process.env.PUBLIC_URL;
 
-const path = process.env.PUBLIC_URL; //${paht} 만들어준 것
-
-export const fetchFlickr = async opt => {
+export const fetchFlickr = async (opt = { type: 'user', id: '197119297@N02' }) => {
 	const baseURL = 'https://www.flickr.com/services/rest/?format=json&nojsoncallback=1';
 	const key = process.env.REACT_APP_FLICKR_KEY;
 	const method_interest = 'flickr.interestingness.getList';
