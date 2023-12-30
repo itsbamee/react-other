@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-const fetchFlickr = async ({ querykey: [queryName, option] }) => {
+const fetchFlickr = async ({ queryKey: [queryName, option] }) => {
 	const baseURL = 'https://www.flickr.com/services/rest/?format=json&nojsoncallback=1';
 	const key = process.env.REACT_APP_FLICKR_KEY;
 	const method_interest = 'flickr.interestingness.getList';
